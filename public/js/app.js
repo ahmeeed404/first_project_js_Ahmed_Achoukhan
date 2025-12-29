@@ -1,5 +1,4 @@
 // !! Account Creation and Management:
-
 let runQuestion = true;
 let users = [];
 while (runQuestion) {
@@ -28,19 +27,19 @@ while (runQuestion) {
     //! login
     else if (choice === "login") {
         alert("You are in LOGIN process");
-
+        login();
     }
 
     // !change password
     else if (choice === "change password") {
         alert("You are in CHANGE PASSWORD process");
+        newPassword();
     }
 
     else {
         alert("Invalid choice, please try again.");
     }
 }
-
 // ** sign up function
 function signUp() {
     alert("SIGN UP");
@@ -80,16 +79,16 @@ function signUp() {
 
     users.push({ name: name, email: email, age: age, password: password });
     alert("Sign up complete! Total users: " + users.length);
-    alert ("you can login now")
-  return;
+    alert("you can login now")
+    return;
 };
 // ** validation de name
 function ValidName() {
     while (true) {
         let name = prompt("enter your full Name : ")
-        if (name === null){
+        if (name === null) {
             return null;
-        } 
+        }
 
         name = name.trim();
 
@@ -125,7 +124,6 @@ function ValidName() {
         return formatted.trim();
     }
 }
-
 // ** validation d'email
 function ValidEmail() {
     while (true) {
@@ -186,7 +184,6 @@ function validAge() {
         return age;
     }
 }
-
 // ** validation de psswd
 function validPassword() {
     while (true) {
@@ -217,9 +214,9 @@ function validPassword() {
         // !!   confirmation de psswd
         let rePsswd = prompt("confirme your password")
         if (rePsswd === null) continue;
-       if (rePsswd !== password) {
+        if (rePsswd !== password) {
             alert("uncorrect password, Please try again.");
-            continue; 
+            continue;
         }
 
         return password;
@@ -227,6 +224,50 @@ function validPassword() {
 }
 
 
+//?? login function
+function login() {
+    alert("Login step")
+    let email;
+    let user;
+
+    while (true) {
+        email = prompt("Enter your email:");
+        if (email === null) continue;
+
+        email = email.trim().toLowerCase();
+        if (email === "exit") return;
+
+        user = users.find(u => u.email === email);
+
+        if (!user) {
+            alert("Email not found. Please try again.");
+            continue;
+        }
+
+        break;
+
+    }
+    while (true) {
+        let password = prompt("Enter your password:");
+        if (password === null) continue;
+
+        if (password === "exit") return;
+
+        if (password !== user.password) {
+            alert("Incorrect password. Try again.");
+            continue;
+        }
+
+        break;
+    }
+
+    alert("Login successful \nWelcome " + user.name);
+    return;
+
+}
+
+
+//?? newPassword function
 
 
 
