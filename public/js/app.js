@@ -77,7 +77,7 @@ function signUp() {
 
 
 
-    users.push({ name: name, email: email, age: age, password: password });
+    users.push({ name: name, email: email, age: age, password: password, balance: 0, loan: 0, investment: 0, history: [] });
     alert("Sign up complete! Total users: " + users.length);
     alert("you can login now")
     return;
@@ -320,5 +320,42 @@ function changePassword() {
 
 }
 
+function userMenu(user) {
+    alert("Login successful \nWelcome " + user.name +
+        "\nYour balance: " + user.balance.toFixed(2) + " DH");
+
+    while (true) {
+        let choice = prompt(
+            "Choose an option:\n" + "- logout\n" + "- withdraw\n" + "- deposit\n" + "- loan\n" +"- invest\n" + "- history"
+        );
+
+        if (!choice) continue;
+        choice = choice.trim().toLowerCase();
+
+        if (choice === "logout") {
+            alert("Logged out successfully");
+            return; 
+        }
+
+        else if (choice === "withdraw") {
+            
+        }
+        else if (choice === "deposit") {
+            
+        }
+        else if (choice === "loan") {
+           
+        }
+        else if (choice === "invest") {
+            
+        }
+        else if (choice === "history") {
+       
+        }
+        else {
+            alert("Invalid option, try again.");
+        }
+    }
+}
 
 
