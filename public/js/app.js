@@ -55,13 +55,19 @@ function signUp() {
 
     alert("Name saved: " + name);
 
-    let email = getValidEmail();
+    let email = ValidEmail();
     if (email === null) {
         alert("Sign up cancelled");
         return;
     }
     alert("Email saved: " + email);
 
+    let age = validAge();
+    if (age === null) {
+        alert("unvalid")
+        return;
+    }
+    alert("age saved : " + age)
 
 
 
@@ -70,7 +76,7 @@ function signUp() {
 
 
 
-    users.push({ name: name, email: email });
+    users.push({ name: name, email: email, age: age });
     alert("Sign up complete! Total users: " + users.length);
 };
 
@@ -117,39 +123,64 @@ function ValidName() {
 }
 
 
-function getValidEmail() {
-        while (true) {
-            let email = prompt("Enter your email:");
+function ValidEmail() {
+    while (true) {
+        let email = prompt("Enter your email:");
 
-            if (email === null) continue;
-            email = email.trim().toLowerCase();
+        if (email === null) continue;
+        email = email.trim().toLowerCase();
 
-            if (email === "exit") return null;
+        if (email === "exit") return null;
 
-            if (email.includes(" ")) {
-                alert("Email must not contain spaces");
-                continue;
-            }
-
-            if (email.length < 10) {
-                alert("Email must be at least 10 characters");
-                continue;
-            }
-
-            let atCount = email.split("@").length - 1;
-            if (atCount !== 1) {
-                alert("Email must have  exactly one '@'");
-                continue;
-            }
-
-            let exists = users.some(u => u.email === email);
-            if (exists) {
-                alert("Email already exist");
-                continue;
-            }
-
-            return email;
+        if (email.includes(" ")) {
+            alert("Email must not contain spaces");
+            continue;
         }
 
+        if (email.length < 10) {
+            alert("Email must be at least 10 characters");
+            continue;
+        }
 
+        let atCount = email.split("@").length - 1;
+        if (atCount !== 1) {
+            alert("Email must have  exactly one '@'");
+            continue;
+        }
+
+        let exists = users.some(u => u.email === email);
+        if (exists) {
+            alert("Email already exist");
+            continue;
+        }
+
+        return email;
     }
+
+
+}
+
+
+function validAge() {
+    while (true) {
+        let age = prompt("enter your age")
+        if (age === null) continue;
+
+        if (age === "exit") return null;
+
+        age = age.trim();
+
+        if (!/^\d+$/.test(age)) {
+            alert("Age must contain only digits");
+            continue;
+        }
+
+        if (age.length === 0 || age.length >= 3) {
+            alert("Age must be 1 or 2 digits only");
+            continue;
+        }
+         age = parseInt(age);
+         
+        return age;
+    }
+}
