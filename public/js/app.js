@@ -226,7 +226,7 @@ function validPassword() {
 
 //?? login function
 function login() {
-    alert("Login step")
+    alert("Login step");
     let email;
     let user;
 
@@ -245,8 +245,8 @@ function login() {
         }
 
         break;
-
     }
+
     while (true) {
         let password = prompt("Enter your password:");
         if (password === null) continue;
@@ -261,10 +261,10 @@ function login() {
         break;
     }
 
-    alert("Login successful \nWelcome " + user.name);
-    return;
-
+   
+    userMenu(user); 
 }
+
 
 
 //?? newPassword function
@@ -321,12 +321,11 @@ function changePassword() {
 }
 
 function userMenu(user) {
-    alert("Login successful \nWelcome " + user.name +
-        "\nYour balance: " + user.balance.toFixed(2) + " DH");
+    alert("Login successful \nWelcome " + user.name + "\nYour balance: " + user.balance.toFixed(2) + " DH");
 
     while (true) {
         let choice = prompt(
-            "Choose an option:\n" + "- logout\n" + "- withdraw\n" + "- deposit\n" + "- loan\n" +"- invest\n" + "- history"
+            "Choose an option:\n" + "- logout\n" + "- withdraw\n" + "- deposit\n" + "- loan\n" + "- invest\n" + "- history"
         );
 
         if (!choice) continue;
@@ -334,23 +333,37 @@ function userMenu(user) {
 
         if (choice === "logout") {
             alert("Logged out successfully");
-            return; 
+            return;
         }
 
         else if (choice === "withdraw") {
-            
+            let amount = parseFloat(prompt("Enter amount to withdraw:"));
+
+            if (isNaN(amount) || amount <= 0) {
+                alert("Invalid amount");
+                continue;
+            }
+
+            if (amount > user.balance) {
+                alert("Not enough balance");
+                continue;
+            }
+
+            user.balance -= amount;
+            user.history.push("Withdraw: -" + amount.toFixed(2) + " DH");
+            alert("Withdraw successful. New balance: " + user.balance.toFixed(2) + " DH");
         }
         else if (choice === "deposit") {
-            
+
         }
         else if (choice === "loan") {
-           
+
         }
         else if (choice === "invest") {
-            
+
         }
         else if (choice === "history") {
-       
+
         }
         else {
             alert("Invalid option, try again.");
