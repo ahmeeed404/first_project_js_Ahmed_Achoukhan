@@ -33,7 +33,7 @@ while (runQuestion) {
     // !change password
     else if (choice === "change password") {
         alert("You are in CHANGE PASSWORD process");
-        newPassword();
+        changePassword();
     }
 
     else {
@@ -268,6 +268,57 @@ function login() {
 
 
 //?? newPassword function
+function changePassword() {
+    alert("CHANGE PASSWORD");
+
+    let user;
+    // valide the email existant
+    while (true) {
+        let email = prompt("Enter your email:");
+        if (email === null) continue;
+
+        email = email.trim().toLowerCase();
+        if (email === "exit") return;
+
+        user = users.find(u => u.email === email);
+
+        if (!user) {
+            alert("Email not found. Please try again.");
+            continue;
+        }
+
+        break;
+    }
+
+    // check the old password
+    while (true) {
+        let oldPassword = prompt("Enter your current password:");
+        if (oldPassword === null) continue;
+
+        if (oldPassword === "exit") return;
+
+        if (oldPassword !== user.password) {
+            alert("Incorrect password.");
+            continue;
+        }
+
+        break;
+    }
+    // enter new password
+    let newPassword = validPassword();
+    if (newPassword === null) {
+        alert("Password change cancelled");
+        return;
+    }
+
+    user.password = newPassword;
+
+    alert("Password changed successfully");
+    alert("You can now login with your new password.");
+
+    return;
+
+}
 
 
 
