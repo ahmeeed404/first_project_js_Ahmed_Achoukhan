@@ -43,7 +43,7 @@ while (runQuestion) {
 
 // ** sign up function
 function signUp() {
-    alert("SIGN UP (type 'exit' anytime to go back)");
+    alert("SIGN UP");
 
     let name = ValidName();
     if (name === null) {
@@ -80,16 +80,18 @@ function signUp() {
 
     users.push({ name: name, email: email, age: age, password: password });
     alert("Sign up complete! Total users: " + users.length);
-  
+    alert ("you can login now")
+  return;
 };
 // ** validation de name
 function ValidName() {
     while (true) {
         let name = prompt("enter your full Name : ")
-        if (name == null) {
-            // continue;
-        }
-        name == name.trim();
+        if (name === null){
+            return null;
+        } 
+
+        name = name.trim();
 
         if (name.toLowerCase() === "exit") {
             return null;
@@ -223,3 +225,8 @@ function validPassword() {
         return password;
     }
 }
+
+
+
+
+
