@@ -1,6 +1,4 @@
-//  Account Creation and Management:
-//? + Allow the user, via prompts, to choose between signing up, logging in, or changing the password.
-
+// !! Account Creation and Management:
 
 let runQuestion = true;
 let users = [];
@@ -43,7 +41,7 @@ while (runQuestion) {
     }
 }
 
-
+// ** sign up function
 function signUp() {
     alert("SIGN UP (type 'exit' anytime to go back)");
 
@@ -70,17 +68,21 @@ function signUp() {
     alert("age saved : " + age)
 
 
+    let password = validPassword();
+    if (password === null) {
+        alert("invalide password")
+        return;
+    } alert("password saved : " + password)
 
 
 
 
 
-
-    users.push({ name: name, email: email, age: age });
+    users.push({ name: name, email: email, age: age, password: password });
     alert("Sign up complete! Total users: " + users.length);
+  
 };
-
-
+// ** validation de name
 function ValidName() {
     while (true) {
         let name = prompt("enter your full Name : ")
@@ -122,7 +124,7 @@ function ValidName() {
     }
 }
 
-
+// ** validation d'email
 function ValidEmail() {
     while (true) {
         let email = prompt("Enter your email:");
@@ -159,8 +161,7 @@ function ValidEmail() {
 
 
 }
-
-
+// ** validations d'age
 function validAge() {
     while (true) {
         let age = prompt("enter your age")
@@ -174,13 +175,51 @@ function validAge() {
             alert("Age must contain only digits");
             continue;
         }
-
         if (age.length === 0 || age.length >= 3) {
             alert("Age must be 1 or 2 digits only");
             continue;
         }
-         age = parseInt(age);
-         
+        age = parseInt(age);
+
         return age;
+    }
+}
+
+// ** validation de psswd
+function validPassword() {
+    while (true) {
+        let password = prompt("Enter your password: ");
+        if (password === null) continue;
+
+        password = password.trim();
+
+        if (password.toLowerCase() === "exit") return null;
+
+
+        if (password.includes(' ')) {
+            alert("Password cannot contain spaces");
+            continue;
+        }
+        if (password.length < 7) {
+            alert("Password must be at least 7 characters");
+            continue;
+        }
+
+
+        let specialChars = /[@#\-+\*\/]/;
+        if (!specialChars.test(password)) {
+            alert("Password must contain at least one special character: @ # - + * /");
+            continue;
+        }
+
+        // !!   confirmation de psswd
+        let rePsswd = prompt("confirme your password")
+        if (rePsswd === null) continue;
+       if (rePsswd !== password) {
+            alert("uncorrect password, Please try again.");
+            continue; 
+        }
+
+        return password;
     }
 }
