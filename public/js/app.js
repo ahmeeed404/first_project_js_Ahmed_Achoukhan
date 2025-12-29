@@ -3,7 +3,7 @@
 
 
 let runQuestion = true;
-let users = []; 
+let users = [];
 while (runQuestion) {
     let choice = prompt(
         "Choose an option:\n- sign up\n- login\n- change password\n(Type 'exit' to cancel)"
@@ -62,6 +62,14 @@ function signUp() {
     }
     alert("Email saved: " + email);
 
+
+
+
+
+
+
+
+
     users.push({ name: name, email: email });
     alert("Sign up complete! Total users: " + users.length);
 };
@@ -104,13 +112,44 @@ function ValidName() {
             alert("Name must not contain numbers or special characters");
             continue;
         }
-
+        return formatted.trim();
     }
 }
 
 
 function getValidEmail() {
+        while (true) {
+            let email = prompt("Enter your email:");
+
+            if (email === null) continue;
+            email = email.trim().toLowerCase();
+
+            if (email === "exit") return null;
+
+            if (email.includes(" ")) {
+                alert("Email must not contain spaces");
+                continue;
+            }
+
+            if (email.length < 10) {
+                alert("Email must be at least 10 characters");
+                continue;
+            }
+
+            let atCount = email.split("@").length - 1;
+            if (atCount !== 1) {
+                alert("Email must have  exactly one '@'");
+                continue;
+            }
+
+            let exists = users.some(u => u.email === email);
+            if (exists) {
+                alert("Email already exist");
+                continue;
+            }
+
+            return email;
+        }
 
 
-
-}
+    }
